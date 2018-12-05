@@ -1,0 +1,90 @@
+﻿<div>
+</div>
+<div class="row">
+    <div>
+        <div class="row">
+            <span>Vertex1</span>
+            <label for="Vertex1X">X</label>
+            <input type="text" id="Vertex1X" />
+            <label for="Vertex1X">Y</label>
+            <input type="text" id="Vertex1Y" />
+        </div>
+        <div class="row">
+            <span>Vertex2</span>
+            <label for="Vertex2X">X</label>
+            <input type="text" id="Vertex2X" />
+            <label for="Vertex2X">Y</label>
+            <input type="text" id="Vertex2Y" />
+        </div>
+        <div class="row">
+            <span>Vertex3</span>
+            <label for="Vertex3X">X</label>
+            <input type="text" id="Vertex3X" />
+            <label for="Vertex3X">Y</label>
+            <input type="text" id="Vertex3Y" />
+        </div>
+        <input type="button" id="search" value="Search" onclick="DoSearch()" />
+        <label id="result"></label>
+    </div>
+</div>
+<div>
+    <div class="row">
+        <input type="button" id="search" value="List" onclick="GetList()" />
+        <label id="ListResults"></label>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    DoSearch = function () {
+        var a = $("#Vertex1X").val();
+        var b = $("#Vertex1Y").val();
+        var c = $("#Vertex2X").val();
+        var d = $("#Vertex2Y").val();
+        var e = $("#Vertex3X").val();
+        var f = $("#Vertex3Y").val();
+        api = '/api/triangles?vertices=["'+a+','+b+'","'+c+','+d+'","'+e+','+f+'"]';
+        console.log(api);
+        $.ajax({
+            url: api,
+            cache: false,
+            type: 'GET',
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            data: {},
+            success: function (data) {
+                $("#result").text(data);
+            }
+
+        })
+        .fail(
+                function (xhr, textStatus, err) {
+                    console.log("Error retrieving", err, xhr, textStatus);
+                });
+
+    }
+
+    GetList = function () {
+        api = '/api/triangles';
+        console.log(api);
+        $.ajax({
+            url: api,
+            cache: false,
+            type: 'GET',
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            data: {},
+            success: function (data) {
+                $("#ListResults").text(data);
+            }
+
+        })
+        .fail(
+                function (xhr, textStatus, err) {
+                    console.log("Error retrieving", err, xhr, textStatus);
+                });
+
+    }
+    
+</script>
