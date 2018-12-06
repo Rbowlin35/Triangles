@@ -1,10 +1,7 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using Triangles.Models;
 
@@ -21,7 +18,7 @@ namespace Triangles.Controllers
         public IEnumerable<string> Get()
         {
             var serializedList = new List<string>();
-            foreach (var item in TraingleFactory.Triangles)
+            foreach (var item in TriangleFactory.ListTriangles())
             {
                 serializedList.Add(JsonConvert.SerializeObject(item));
             }
