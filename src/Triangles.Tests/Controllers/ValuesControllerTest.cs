@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -41,7 +41,8 @@ namespace Triangles.Tests.Controllers
         [TestCase("F11", "{\"Row\":6,\"Col\":11,\"Location\":\"F11\",\"Vertices\":[\"50, 50\",\"60, 60\",\"50, 60\"]}")]
         [TestCase("F12", "{\"Row\":6,\"Col\":12,\"Location\":\"F12\",\"Vertices\":[\"50, 50\",\"60, 60\",\"60, 50\"]}")]
         [TestCase("G1", "Error: Invalid Id.  Must be in [A-F][1-12] range.")]
-        [TestCase("12F", "Error: Invalid Id.  Must be in [A-F][1-12] range.")]
+        [TestCase("A0", "Error: Invalid Id.  Must be in [A-F][1-12] range.")]
+        [TestCase("A23", "Error: Invalid Id.  Must be in [A-F][1-12] range.")]
         public void GetById(string input, string expected)
         {
             // Arrange
@@ -62,8 +63,6 @@ namespace Triangles.Tests.Controllers
         public void GetByVertices(string input, string expected)
         {
             // Arrange
-            var list = new List<Point>() { new Point(0, 0), new Point(10, 10), new Point(0, 10) };
-            var output = JsonConvert.SerializeObject(list);
             TrianglesController controller = new TrianglesController();
 
             // Act
