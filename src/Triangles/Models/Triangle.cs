@@ -1,8 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using Triangles.Models;
 
 namespace Triangles.Models
 {
@@ -98,7 +97,7 @@ namespace Triangles.Models
             int col;
             if ( Triangle.TryParse(id, out row, out col))
             {
-                triangle = TraingleFactory.Triangles.Where(t => t.Row == row && t.Col == col).First();
+                triangle = new Triangle(row, col);
             }
 
             return triangle != null;
@@ -120,32 +119,42 @@ namespace Triangles.Models
             if (!Int32.TryParse(colString, out col))
                 return false;
 
-            return true;
+            return col > 0 && col < 13;
         }
 
         internal static bool TryFind(List<Point> list, out Triangle triangle)
         {
             triangle = null;
-            foreach( Triangle item in TraingleFactory.Triangles)
-            {
-                bool match = true;
-                foreach (var v in item.Vertices)
-                {
-                    if (!list.Contains(v))
-                    {
-                        match = false;
-                        break;
-                    }
-                }
+            var centroid = GetCentroid(list);
 
-                if (match)
-                {
-                    triangle = item;
-                    break;
-                }
-            }
+            int row = GetRow(centroid);
+            int col = GetCol(centroid);
+
+            if (row > 0 && row <= (int)Alpha.F
+                && col > 0 && col < 13)
+                triangle = new Triangle((Alpha)row, col);
 
             return triangle != null;
+        }
+
+        private static int GetCol(Point centroid)
+        {
+            return (((centroid.Y / sideLegth) + 1) * ((centroid.X > centroid.Y) ? 2 : 1));
+        }
+
+        private static int GetRow(Point centroid)
+        {
+            return (centroid.X / sideLegth) + 1;
+        }
+
+        internal static Point GetCentroid(List<Point> list)
+        {
+            return new Point()
+            {
+                X = list.Sum(s => s.X) / 3,
+                Y = list.Sum(s => s.Y) / 3
+            };
+
         }
         #endregion
     }
