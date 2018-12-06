@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,32 +6,20 @@ using System.Web;
 
 namespace Triangles.Models
 {
-    public class TraingleFactory
+    public class TriangleFactory
     {
-        internal static List<Triangle> triangles;
-
-        internal static void CreateTriangles()
+        internal static List<Triangle> ListTriangles()
         {
-            if (triangles == null)
+            var triangles = new List<Triangle>();
+            foreach (Alpha a in Enum.GetValues(typeof(Alpha)))
             {
-                triangles = new List<Triangle>();
-                foreach (Alpha a in Enum.GetValues(typeof(Alpha)))
+                for (int i = 1; i < 13; i++)
                 {
-                    for (int i = 1; i < 13; i++)
-                    {
-                        triangles.Add(new Triangle(a, i));
-                    }
+                    triangles.Add(new Triangle(a, i));
                 }
             }
-        }
 
-        public static List<Triangle> Triangles
-        {
-            get
-            {
-                CreateTriangles();
-                return triangles;
-            }
+            return triangles;
         }
 
     }
