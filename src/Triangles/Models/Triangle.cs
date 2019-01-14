@@ -9,7 +9,7 @@ namespace Triangles.Models
 
     public class Triangle
     {
-        internal const int sideLegth = 10;
+        internal const int sideLegth = 100;
 
         public Triangle(Alpha row, int col)
         {
@@ -40,6 +40,29 @@ namespace Triangles.Models
             }
         }
 
+        public int CSSTop
+        {
+            get
+            {
+                return rootY;
+            }
+        }
+
+        public int CSSLeft
+        {
+            get
+            {
+                return rootX;
+            }
+        }
+
+        public string CSSStyle
+        {
+            get
+            {
+                return isEvenColumn ? "right" : "left";
+            }
+        }
         #region Helpers
         internal bool isEvenColumn
         {

@@ -1,4 +1,43 @@
-﻿<div>
+﻿<style>
+    div.arrow-left {
+        border-bottom: 100px solid red;
+        border-left: 0px;
+        border-right: 100px solid transparent;
+        width: 0;
+        height: 0;
+        white-space: nowrap;
+        display: inline-block;
+        position: absolute;
+        color: white;
+    }
+
+    p.arrow-left {
+        position: relative;
+        top: 50px;
+        left: 25px;
+    }
+
+    /* create an arrow that points right */
+    div.arrow-right {
+        border-top: 100px solid blue;
+        border-right: 0px;
+        border-left: 100px solid transparent;
+        width: 0;
+        height: 0;
+        white-space: nowrap;
+        display: inline-block;
+        position: absolute;
+        color: white;
+    }
+
+    p.arrow-right {
+        position: relative;
+        top: -75px;
+        left: -25px;
+    }
+</style>
+
+<div>
 </div>
 <div class="row">
     <div>
@@ -28,10 +67,11 @@
     </div>
 </div>
 <div>
-    <div class="row">
-        <input type="button" id="search" value="List" onclick="GetList()" />
-        <label id="ListResults"></label>
-    </div>
+    <div id="content" style="position: relative"></div>
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/16.4.0/umd/react.development.js"></script>
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/remarkable/1.7.1/remarkable.min.js"></script>
+    <script src="@Url.Content("~/Scripts/Triangles.jsx")"></script>
 </div>
 
 

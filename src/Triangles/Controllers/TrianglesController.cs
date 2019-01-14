@@ -15,14 +15,9 @@ namespace Triangles.Controllers
         /// Get a list of all the triangles on the board
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<string> Get()
+        public IEnumerable<Triangle> Get()
         {
-            var serializedList = new List<string>();
-            foreach (var item in TriangleFactory.ListTriangles())
-            {
-                serializedList.Add(JsonConvert.SerializeObject(item));
-            }
-            return serializedList;
+            return TriangleFactory.ListTriangles();
         }
 
         // GET api/triangles/A12
